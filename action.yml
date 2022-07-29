@@ -6,6 +6,10 @@ branding:
   color: 'gray-dark'
 
 inputs:
+  root_path:
+    description: 'root path from which to execute the job'
+    required: false
+    default: .
   main:
     description: 'the main python file (without .py)'
     required: true
@@ -60,6 +64,7 @@ runs:
       shell: bash
       run: |
         python -m pip install --upgrade pip 
+        [ ${{ inputs.root_path }} != "." ] && cd ${{ inputs.root_path }}
         ${{ inputs.use-dependencies }} && pip install -r ${{ inputs.requirements_path }}
         ${{ inputs.no-console }} && NO_CONSOLE=--noconsole
         DATA_PATHS=''
