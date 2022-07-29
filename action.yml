@@ -69,7 +69,7 @@ runs:
           while read -r path 
           do
             DATA_PATHS+=" --add-data $path" 
-          done <<< ${{ inputs.data_paths }} 
+          done <<< "${{ inputs.data_paths }} "
         fi
         echo "data paths: $DATA_PATHS"
         [ ${{ inputs.icon }} != "NONE" ] && ICON=--icon=${{ inputs.icon }}.ico
