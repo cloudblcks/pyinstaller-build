@@ -71,6 +71,7 @@ runs:
             DATA_PATHS+=" --add-data $path" 
           done <<< ${{ inputs.data_paths }} 
         fi
+        echo "data paths: $DATA_PATHS"
         [ ${{ inputs.icon }} != "NONE" ] && ICON=--icon=${{ inputs.icon }}.ico
         pip install pyinstaller==${{ inputs.pyinstaller_version }}
         pyinstaller --clean -y --dist ${{ inputs.dist }} $NO_CONSOLE $ICON --name ${{ inputs.artifact }} --path ${{ inputs.src_path }} $DATA_PATHS --onefile ${{ inputs.main }}.py
